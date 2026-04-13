@@ -1,4 +1,4 @@
-# 🚀 Configuração de CI com GitHub Actions (Flask)
+# 📚 Pipeline CI com Flask usando GitHub Actions
 
 ## 📌 Objetivo
 
@@ -30,7 +30,7 @@ git push -u origin main
 
 ### 3. Criar estrutura do workflow
 
-Criar as pastas e arquivo:
+Criar as pastas:
 
 ```
 .github/
@@ -119,11 +119,54 @@ pip install -r requirements.txt
 
 ---
 
-### 9. Enviar atualização
+### 9. Criar arquivo app.py
+
+Criar o arquivo:
 
 ```bash
-git add requirements.txt
-git commit -m "fix: requirements na raiz"
+notepad app.py
+```
+
+Adicionar o código:
+
+```python
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return {"status": "ok"}
+```
+
+Testar:
+
+```bash
+python -m py_compile app.py
+```
+
+---
+
+### 10. Enviar arquivos para o GitHub
+
+```bash
+git add .
+git commit -m "feat: adicionando flask e app"
+```
+
+---
+
+### 11. Atualizar repositório local
+
+```bash
+git pull origin main --rebase
+```
+
+---
+
+### 12. Enviar alterações finais
+
+```bash
 git push
 ```
 
@@ -131,9 +174,19 @@ git push
 
 ## ✅ Resultado
 
-* Pipeline configurado
+* Pipeline CI configurado
 * Execução automática no GitHub Actions
 * Instalação de dependências funcionando
-* Verificação de código ativa
+* Verificação de sintaxe do `app.py` ativa
+
+---
+
+## 🔍 Verificação
+
+Acessar o repositório no GitHub:
+
+👉 Aba **Actions**
+
+Verificar execução do pipeline (status verde ✔)
 
 ---
